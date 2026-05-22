@@ -94,6 +94,11 @@ export const translations: Translations = {
     settingsSaving: "กำลังบันทึก...",
     settingsSaved: "บันทึกการตั้งค่าสำเร็จ",
     settingsBackHome: "กลับหน้าหลัก",
+    tooltipSheetId: "เปิด Google Sheets → ดู URL จะเห็น docs.google.com/spreadsheets/d/[ID_อยู่ตรงนี้]/edit → คัดลอก ID มาวาง",
+    tooltipLineToken: "ไปที่ LINE Developers Console → เลือก Channel → Tab: Messaging API → คัดลอก Channel Access Token (Long-lived)",
+    tooltipLineUserId: "ไปที่ LINE Developers Console → Tab: Basic Settings → Your user ID (ขึ้นต้นด้วย U)",
+    tooltipTelegramToken: "พิมพ์ /newbot ใน @BotFather บน Telegram → ทำตามขั้นตอน → จะได้ Token กลับมา",
+    tooltipTelegramChatId: "ส่งข้อความอะไรก็ได้ให้ Bot → เปิด https://api.telegram.org/bot[TOKEN]/getUpdates → ดู chat.id",
   },
   en: {
     title: "Receipt Scanner AI",
@@ -179,5 +184,10 @@ export const translations: Translations = {
     settingsSaving: "Saving...",
     settingsSaved: "Settings saved successfully",
     settingsBackHome: "Back to Home",
+    tooltipSheetId: "Open Google Sheets → look at the URL: docs.google.com/spreadsheets/d/[ID_IS_HERE]/edit → copy the ID",
+    tooltipLineToken: "Go to LINE Developers Console → select Channel → Messaging API tab → copy Channel Access Token (Long-lived)",
+    tooltipLineUserId: "Go to LINE Developers Console → Basic Settings tab → Your user ID (starts with U)",
+    tooltipTelegramToken: "Type /newbot to @BotFather on Telegram → follow the steps → you'll receive a Token",
+    tooltipTelegramChatId: "Send any message to your Bot → open https://api.telegram.org/bot[TOKEN]/getUpdates → find chat.id",
   },
 };

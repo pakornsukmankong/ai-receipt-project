@@ -14,6 +14,7 @@ import { Receipt, ArrowLeft, Save } from "lucide-react";
 import api from "../lib/api";
 import type { ApiError } from "../lib/api";
 import type { UserSettings } from "../types";
+import { Tooltip } from "../components/ui/tooltip";
 
 function SettingsPage() {
   const { t } = useLanguage();
@@ -104,7 +105,11 @@ function SettingsPage() {
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="space-y-2">
-                <label className="text-sm font-medium">{t.settingsSheetId}</label>
+                <label className="text-sm font-medium flex items-center">
+                  <Tooltip content={t.tooltipSheetId}>
+                    {t.settingsSheetId}
+                  </Tooltip>
+                </label>
                 <Input value={settings.googleSheetId} onChange={handleChange("googleSheetId")} placeholder="1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms" />
                 <p className="text-xs text-muted-foreground">{t.settingsSheetIdHint}</p>
               </div>
@@ -117,11 +122,19 @@ function SettingsPage() {
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="space-y-2">
-                <label className="text-sm font-medium">{t.settingsLineToken}</label>
+                <label className="text-sm font-medium flex items-center">
+                  <Tooltip content={t.tooltipLineToken}>
+                    {t.settingsLineToken}
+                  </Tooltip>
+                </label>
                 <Input type="password" value={settings.lineChannelAccessToken} onChange={handleChange("lineChannelAccessToken")} placeholder="Channel Access Token" />
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium">{t.settingsLineUserId}</label>
+                <label className="text-sm font-medium flex items-center">
+                  <Tooltip content={t.tooltipLineUserId}>
+                    {t.settingsLineUserId}
+                  </Tooltip>
+                </label>
                 <Input value={settings.lineUserId} onChange={handleChange("lineUserId")} placeholder="U1234567890abcdef..." />
               </div>
             </CardContent>
@@ -133,11 +146,19 @@ function SettingsPage() {
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="space-y-2">
-                <label className="text-sm font-medium">{t.settingsTelegramToken}</label>
+                <label className="text-sm font-medium flex items-center">
+                  <Tooltip content={t.tooltipTelegramToken}>
+                    {t.settingsTelegramToken}
+                  </Tooltip>
+                </label>
                 <Input type="password" value={settings.telegramBotToken} onChange={handleChange("telegramBotToken")} placeholder="123456789:ABCdefGHIjklMNOpqrsTUVwxyz" />
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-medium">{t.settingsTelegramChatId}</label>
+                <label className="text-sm font-medium flex items-center">
+                  <Tooltip content={t.tooltipTelegramChatId}>
+                    {t.settingsTelegramChatId}
+                  </Tooltip>
+                </label>
                 <Input value={settings.telegramChatId} onChange={handleChange("telegramChatId")} placeholder="123456789" />
               </div>
             </CardContent>
