@@ -168,7 +168,7 @@ function SettingsPage() {
           {success && <div className="p-3 rounded-lg bg-green-50 border border-green-200 text-green-700 text-sm">✅ {success}</div>}
 
           <Button type="submit" className="w-full" size="lg" disabled={saving}>
-            {saving ? <Spinner className="mr-2 h-4 w-4" /> : <Save className="mr-2 h-4 w-4" />}
+            {saving ? <Spinner className="mr-2 h-4 w-4" /> : null}
             {t.settingsSaveBtn}
           </Button>
         </form>
