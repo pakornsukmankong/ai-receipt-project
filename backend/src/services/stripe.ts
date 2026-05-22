@@ -1,15 +1,16 @@
-import StripeLib from "stripe";
+/* eslint-disable @typescript-eslint/no-require-imports */
+const Stripe = require("stripe");
 import { createClient } from "@supabase/supabase-js";
 import type { TopUpPackage, WebhookResult } from "../types";
 
-let _stripe: StripeLib | null = null;
+let _stripe: any = null;
 
-function getStripe(): StripeLib {
+function getStripe() {
   if (!_stripe) {
     if (!process.env.STRIPE_SECRET_KEY) {
       throw new Error("STRIPE_SECRET_KEY is not configured. Please add it to backend/.env");
     }
-    _stripe = new StripeLib(process.env.STRIPE_SECRET_KEY);
+    _stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
   }
   return _stripe;
 }
@@ -41,7 +42,8 @@ export async function createCheckoutSession(userId: string, userEmail: string, p
     throw new Error("Invalid package ID");
   }
 
-  const session = await getStripe().checkout.sessions.create({
+  const stripe = getStripe();
+  const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card", "promptpay"],
     mode: "payment",
     customer_email: userEmail,
@@ -78,16 +80,16 @@ export async function createCheckoutSession(userId: string, userEmail: string, p
   return { sessionId: session.id, url: session.url };
 }
 
-export async function handleWebhookEvent(event: StripeLib.Event): Promise<WebhookResult> {
+export async function handleWebhookEvent(event: any): Promise<WebhookResult> {
   if (event.type === "checkout.session.completed") {
-    const session = event.data.object as StripeLib.Checkout.Session;
+    const session = event.data.object;
 
     if (session.payment_status !== "paid") {
       return { processed: false, reason: "payment not paid" };
     }
 
-    const userId = session.metadata!.userId;
-    const quota = parseInt(session.metadata!.quota, 10);
+    const userId = session.metadata.userId;
+    const quota = parseInt(session.metadata.quota, 10);
     const sessionId = session.id;
 
     const { data: existing } = await supabase

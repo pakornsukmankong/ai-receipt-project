@@ -2,7 +2,7 @@ import "dotenv/config";
 import express, { type Request, type Response, type NextFunction } from "express";
 import cors from "cors";
 import multer from "multer";
-import Stripe from "stripe";
+const Stripe = require("stripe");
 import rateLimit from "express-rate-limit";
 import { requireAuth } from "./middleware/auth";
 import { analyzeReceipt } from "./services/openai";
@@ -74,7 +74,7 @@ app.post("/webhook/stripe", express.raw({ type: "application/json" }), async (re
 
   try {
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-    const event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+    const event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET!);
 
     const result = await handleWebhookEvent(event);
     if (result.processed) {
