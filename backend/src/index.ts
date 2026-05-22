@@ -101,7 +101,7 @@ app.get("/api/settings", requireAuth, async (req: Request, res: Response) => {
     if (!settings) {
       res.json({
         success: true,
-        data: { googleSheetId: "", lineChannelAccessToken: "", lineUserId: "", telegramBotToken: "", telegramChatId: "" },
+        data: { googleSheetId: "", lineChannelAccessToken: "", lineUserId: "", telegramBotToken: "", telegramChatId: "", enableGoogleSheets: true, enableLine: true, enableTelegram: true },
       });
       return;
     }
@@ -113,6 +113,9 @@ app.get("/api/settings", requireAuth, async (req: Request, res: Response) => {
         lineUserId: settings.line_user_id,
         telegramBotToken: settings.telegram_bot_token,
         telegramChatId: settings.telegram_chat_id,
+        enableGoogleSheets: settings.enable_google_sheets ?? true,
+        enableLine: settings.enable_line ?? true,
+        enableTelegram: settings.enable_telegram ?? true,
       },
     });
   } catch (error) {
@@ -124,9 +127,9 @@ app.get("/api/settings", requireAuth, async (req: Request, res: Response) => {
 app.put("/api/settings", requireAuth, async (req: Request, res: Response) => {
   try {
     const { user } = req as AuthenticatedRequest;
-    const { googleSheetId, lineChannelAccessToken, lineUserId, telegramBotToken, telegramChatId } = req.body;
+    const { googleSheetId, lineChannelAccessToken, lineUserId, telegramBotToken, telegramChatId, enableGoogleSheets, enableLine, enableTelegram } = req.body;
 
-    await upsertUserSettings(user.id, { googleSheetId, lineChannelAccessToken, lineUserId, telegramBotToken, telegramChatId });
+    await upsertUserSettings(user.id, { googleSheetId, lineChannelAccessToken, lineUserId, telegramBotToken, telegramChatId, enableGoogleSheets, enableLine, enableTelegram });
     res.json({ success: true, message: "บันทึกการตั้งค่าสำเร็จ" });
   } catch (error) {
     logger.error("Save settings error:", error);
@@ -226,21 +229,21 @@ app.post("/api/upload-receipt", requireAuth, handleUpload, async (req: Request, 
 
     let sheetSaved = false;
     const sheetId = userSettings?.google_sheet_id;
-    if (sheetId) {
+    if (sheetId && userSettings?.enable_google_sheets !== false) {
       try { await appendToSheet(receiptData, sheetId); sheetSaved = true; } catch (err) { logger.error("Google Sheets error:", err); }
     }
 
     let lineSent = false;
     const lineToken = userSettings?.line_channel_access_token;
     const lineUserId = userSettings?.line_user_id;
-    if (lineToken && lineUserId) {
+    if (lineToken && lineUserId && userSettings?.enable_line !== false) {
       try { await sendLineNotification(receiptData, lineToken, lineUserId); lineSent = true; } catch (err) { logger.error("LINE notification error:", err); }
     }
 
     let telegramSent = false;
     const tgToken = userSettings?.telegram_bot_token;
     const tgChatId = userSettings?.telegram_chat_id;
-    if (tgToken && tgChatId) {
+    if (tgToken && tgChatId && userSettings?.enable_telegram !== false) {
       try { await sendTelegramNotification(receiptData, tgToken, tgChatId); telegramSent = true; } catch (err) { logger.error("Telegram notification error:", err); }
     }
 

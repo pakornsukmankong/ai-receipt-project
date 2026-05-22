@@ -35,6 +35,9 @@ export async function upsertUserSettings(userId: string, settings: UserSettingsI
         line_user_id: settings.lineUserId || "",
         telegram_bot_token: settings.telegramBotToken || "",
         telegram_chat_id: settings.telegramChatId || "",
+        enable_google_sheets: settings.enableGoogleSheets ?? true,
+        enable_line: settings.enableLine ?? true,
+        enable_telegram: settings.enableTelegram ?? true,
       },
       { onConflict: "user_id" }
     )

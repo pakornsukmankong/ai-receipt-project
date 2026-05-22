@@ -100,3 +100,9 @@ CREATE POLICY "Service role can manage transactions"
 -- ─── Add bonus_quota to user_settings ────────────────────────────────
 
 ALTER TABLE user_settings ADD COLUMN IF NOT EXISTS bonus_quota INTEGER DEFAULT 0;
+
+-- ─── Add enable toggles to user_settings ─────────────────────────────
+
+ALTER TABLE user_settings ADD COLUMN IF NOT EXISTS enable_google_sheets BOOLEAN DEFAULT true;
+ALTER TABLE user_settings ADD COLUMN IF NOT EXISTS enable_line BOOLEAN DEFAULT true;
+ALTER TABLE user_settings ADD COLUMN IF NOT EXISTS enable_telegram BOOLEAN DEFAULT true;

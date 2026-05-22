@@ -15,6 +15,7 @@ import api from "../lib/api";
 import type { ApiError } from "../lib/api";
 import type { UserSettings } from "../types";
 import { Tooltip } from "../components/ui/tooltip";
+import { Toggle } from "../components/ui/toggle";
 
 function SettingsPage() {
   const { t } = useLanguage();
@@ -28,6 +29,9 @@ function SettingsPage() {
     lineUserId: "",
     telegramBotToken: "",
     telegramChatId: "",
+    enableGoogleSheets: true,
+    enableLine: true,
+    enableTelegram: true,
   });
 
   useEffect(() => { loadSettings(); }, []);
@@ -101,67 +105,94 @@ function SettingsPage() {
         <form onSubmit={handleSave} className="space-y-5">
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">📊 Google Sheets</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="space-y-2">
-                <label className="text-sm font-medium flex items-center">
-                  <Tooltip content={t.tooltipSheetId}>
-                    {t.settingsSheetId}
-                  </Tooltip>
-                </label>
-                <Input value={settings.googleSheetId} onChange={handleChange("googleSheetId")} placeholder="1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms" />
-                <p className="text-xs text-muted-foreground">{t.settingsSheetIdHint}</p>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-base">📊 Google Sheets</CardTitle>
+                <Toggle
+                  checked={settings.enableGoogleSheets}
+                  onChange={(v) => setSettings((prev) => ({ ...prev, enableGoogleSheets: v }))}
+                  label={settings.enableGoogleSheets ? t.toggleOn : t.toggleOff}
+                />
               </div>
-            </CardContent>
+            </CardHeader>
+            {settings.enableGoogleSheets && (
+              <CardContent className="space-y-3">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium flex items-center">
+                    <Tooltip content={t.tooltipSheetId}>
+                      {t.settingsSheetId}
+                    </Tooltip>
+                  </label>
+                  <Input value={settings.googleSheetId} onChange={handleChange("googleSheetId")} placeholder="1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms" />
+                  <p className="text-xs text-muted-foreground">{t.settingsSheetIdHint}</p>
+                </div>
+              </CardContent>
+            )}
           </Card>
 
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">💬 LINE</CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-base">💬 LINE</CardTitle>
+                <Toggle
+                  checked={settings.enableLine}
+                  onChange={(v) => setSettings((prev) => ({ ...prev, enableLine: v }))}
+                  label={settings.enableLine ? t.toggleOn : t.toggleOff}
+                />
+              </div>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="space-y-2">
-                <label className="text-sm font-medium flex items-center">
-                  <Tooltip content={t.tooltipLineToken}>
-                    {t.settingsLineToken}
-                  </Tooltip>
-                </label>
-                <Input type="password" value={settings.lineChannelAccessToken} onChange={handleChange("lineChannelAccessToken")} placeholder="Channel Access Token" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium flex items-center">
-                  <Tooltip content={t.tooltipLineUserId}>
-                    {t.settingsLineUserId}
-                  </Tooltip>
-                </label>
-                <Input value={settings.lineUserId} onChange={handleChange("lineUserId")} placeholder="U1234567890abcdef..." />
-              </div>
-            </CardContent>
+            {settings.enableLine && (
+              <CardContent className="space-y-3">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium flex items-center">
+                    <Tooltip content={t.tooltipLineToken}>
+                      {t.settingsLineToken}
+                    </Tooltip>
+                  </label>
+                  <Input type="password" value={settings.lineChannelAccessToken} onChange={handleChange("lineChannelAccessToken")} placeholder="Channel Access Token" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium flex items-center">
+                    <Tooltip content={t.tooltipLineUserId}>
+                      {t.settingsLineUserId}
+                    </Tooltip>
+                  </label>
+                  <Input value={settings.lineUserId} onChange={handleChange("lineUserId")} placeholder="U1234567890abcdef..." />
+                </div>
+              </CardContent>
+            )}
           </Card>
 
           <Card>
             <CardHeader className="pb-3">
-              <CardTitle className="text-base">📨 Telegram</CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-base">📨 Telegram</CardTitle>
+                <Toggle
+                  checked={settings.enableTelegram}
+                  onChange={(v) => setSettings((prev) => ({ ...prev, enableTelegram: v }))}
+                  label={settings.enableTelegram ? t.toggleOn : t.toggleOff}
+                />
+              </div>
             </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="space-y-2">
-                <label className="text-sm font-medium flex items-center">
-                  <Tooltip content={t.tooltipTelegramToken}>
-                    {t.settingsTelegramToken}
-                  </Tooltip>
-                </label>
-                <Input type="password" value={settings.telegramBotToken} onChange={handleChange("telegramBotToken")} placeholder="123456789:ABCdefGHIjklMNOpqrsTUVwxyz" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium flex items-center">
-                  <Tooltip content={t.tooltipTelegramChatId}>
-                    {t.settingsTelegramChatId}
-                  </Tooltip>
-                </label>
-                <Input value={settings.telegramChatId} onChange={handleChange("telegramChatId")} placeholder="123456789" />
-              </div>
-            </CardContent>
+            {settings.enableTelegram && (
+              <CardContent className="space-y-3">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium flex items-center">
+                    <Tooltip content={t.tooltipTelegramToken}>
+                      {t.settingsTelegramToken}
+                    </Tooltip>
+                  </label>
+                  <Input type="password" value={settings.telegramBotToken} onChange={handleChange("telegramBotToken")} placeholder="123456789:ABCdefGHIjklMNOpqrsTUVwxyz" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium flex items-center">
+                    <Tooltip content={t.tooltipTelegramChatId}>
+                      {t.settingsTelegramChatId}
+                    </Tooltip>
+                  </label>
+                  <Input value={settings.telegramChatId} onChange={handleChange("telegramChatId")} placeholder="123456789" />
+                </div>
+              </CardContent>
+            )}
           </Card>
 
           {error && <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">❌ {error}</div>}

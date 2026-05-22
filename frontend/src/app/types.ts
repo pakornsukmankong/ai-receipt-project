@@ -47,4 +47,7 @@ export interface UserSettings {
   lineUserId: string;
   telegramBotToken: string;
   telegramChatId: string;
+  enableGoogleSheets: boolean;
+  enableLine: boolean;
+  enableTelegram: boolean;
 }

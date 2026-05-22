@@ -99,6 +99,8 @@ export const translations: Translations = {
     tooltipLineUserId: "ไปที่ LINE Developers Console → Tab: Basic Settings → Your user ID (ขึ้นต้นด้วย U)",
     tooltipTelegramToken: "พิมพ์ /newbot ใน @BotFather บน Telegram → ทำตามขั้นตอน → จะได้ Token กลับมา",
     tooltipTelegramChatId: "ส่งข้อความอะไรก็ได้ให้ Bot → เปิด https://api.telegram.org/bot[TOKEN]/getUpdates → ดู chat.id",
+    toggleOn: "เปิด",
+    toggleOff: "ปิด",
   },
   en: {
     title: "Receipt Scanner AI",
@@ -189,5 +191,7 @@ export const translations: Translations = {
     tooltipLineUserId: "Go to LINE Developers Console → Basic Settings tab → Your user ID (starts with U)",
     tooltipTelegramToken: "Type /newbot to @BotFather on Telegram → follow the steps → you'll receive a Token",
     tooltipTelegramChatId: "Send any message to your Bot → open https://api.telegram.org/bot[TOKEN]/getUpdates → find chat.id",
+    toggleOn: "On",
+    toggleOff: "Off",
   },
 };

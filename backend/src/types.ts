@@ -32,6 +32,9 @@ export interface UserSettingsRow {
   telegram_bot_token: string;
   telegram_chat_id: string;
   bonus_quota: number;
+  enable_google_sheets: boolean;
+  enable_line: boolean;
+  enable_telegram: boolean;
   created_at: string;
   updated_at: string;
 }
@@ -42,6 +45,9 @@ export interface UserSettingsInput {
   lineUserId: string;
   telegramBotToken: string;
   telegramChatId: string;
+  enableGoogleSheets: boolean;
+  enableLine: boolean;
+  enableTelegram: boolean;
 }
 
 export interface UsageResult {
