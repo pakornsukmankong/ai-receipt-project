@@ -1,15 +1,15 @@
-import Stripe from "stripe";
+import StripeLib from "stripe";
 import { createClient } from "@supabase/supabase-js";
 import type { TopUpPackage, WebhookResult } from "../types";
 
-let _stripe: Stripe | null = null;
+let _stripe: StripeLib | null = null;
 
-function getStripe(): Stripe {
+function getStripe(): StripeLib {
   if (!_stripe) {
     if (!process.env.STRIPE_SECRET_KEY) {
       throw new Error("STRIPE_SECRET_KEY is not configured. Please add it to backend/.env");
     }
-    _stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+    _stripe = new StripeLib(process.env.STRIPE_SECRET_KEY);
   }
   return _stripe;
 }
@@ -78,9 +78,9 @@ export async function createCheckoutSession(userId: string, userEmail: string, p
   return { sessionId: session.id, url: session.url };
 }
 
-export async function handleWebhookEvent(event: Stripe.Event): Promise<WebhookResult> {
+export async function handleWebhookEvent(event: StripeLib.Event): Promise<WebhookResult> {
   if (event.type === "checkout.session.completed") {
-    const session = event.data.object as Stripe.Checkout.Session;
+    const session = event.data.object as StripeLib.Checkout.Session;
 
     if (session.payment_status !== "paid") {
       return { processed: false, reason: "payment not paid" };

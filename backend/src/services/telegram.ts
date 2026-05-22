@@ -128,7 +128,7 @@ async function getTelegramFile(fileId: string): Promise<{ file_path: string }> {
   const response = await fetch(
     `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getFile?file_id=${fileId}`
   );
-  const data = await response.json();
+  const data = await response.json() as { ok: boolean; result: { file_path: string } };
   if (!data.ok) {
     throw new Error(`Telegram getFile error: ${JSON.stringify(data)}`);
   }

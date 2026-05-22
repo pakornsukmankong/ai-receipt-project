@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "start": "tsx src/index.ts",
-    "build": "tsc",
-    "start:prod": "node dist/index.js"
+    "start": "node dist/index.js",
+    "build": "tsc"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.105.4",
@@ -26,6 +25,7 @@
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/multer": "^2.1.0",
+    "@types/node": "^22.19.19",
     "tsx": "^4.22.3",
     "typescript": "^6.0.3"
   }
