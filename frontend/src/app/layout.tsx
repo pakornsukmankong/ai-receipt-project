@@ -18,6 +18,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <title>Receipt Scanner AI</title>
         <meta name="description" content="AI-powered expense intelligence platform" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body className="min-h-screen font-sans antialiased">
         <AuthProvider>

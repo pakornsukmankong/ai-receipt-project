@@ -106,7 +106,18 @@ function SettingsPage() {
           <Card>
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base">📊 Google Sheets</CardTitle>
+                <CardTitle className="text-base flex items-center gap-2">
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
+                    <path d="M6 2h12a2 2 0 012 2v16a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2z" fill="#0F9D58"/>
+                    <path d="M18 2l2 2v-2h-2z" fill="#087A45" opacity="0.5"/>
+                    <rect x="7" y="8" width="10" height="8" rx="0.5" fill="white"/>
+                    <line x1="7" y1="10.5" x2="17" y2="10.5" stroke="#0F9D58" strokeWidth="0.5"/>
+                    <line x1="7" y1="13" x2="17" y2="13" stroke="#0F9D58" strokeWidth="0.5"/>
+                    <line x1="10.5" y1="8" x2="10.5" y2="16" stroke="#0F9D58" strokeWidth="0.5"/>
+                    <line x1="14" y1="8" x2="14" y2="16" stroke="#0F9D58" strokeWidth="0.5"/>
+                  </svg>
+                  Google Sheets
+                </CardTitle>
                 <Toggle
                   checked={settings.enableGoogleSheets}
                   onChange={(v) => setSettings((prev) => ({ ...prev, enableGoogleSheets: v }))}
@@ -132,7 +143,13 @@ function SettingsPage() {
           <Card>
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base">💬 LINE</CardTitle>
+                <CardTitle className="text-base flex items-center gap-2">
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
+                    <rect width="24" height="24" rx="6" fill="#06C755"/>
+                    <path d="M12 4.5c-4.14 0-7.5 2.8-7.5 6.25 0 3.09 2.74 5.68 6.44 6.17.25.05.59.17.68.38.08.19.05.49.03.68l-.11.66c-.03.19-.16.75.66.41.82-.34 4.42-2.6 6.03-4.46C19.68 12.93 19.5 11.5 19.5 10.75 19.5 7.3 16.14 4.5 12 4.5z" fill="white"/>
+                  </svg>
+                  LINE
+                </CardTitle>
                 <Toggle
                   checked={settings.enableLine}
                   onChange={(v) => setSettings((prev) => ({ ...prev, enableLine: v }))}
@@ -165,7 +182,13 @@ function SettingsPage() {
           <Card>
             <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base">📨 Telegram</CardTitle>
+                <CardTitle className="text-base flex items-center gap-2">
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="12" fill="#2AABEE"/>
+                    <path d="M5.5 11.5l11.5-4.5c.5-.2 1 .1.8.8l-2 9.5c-.1.6-.5.7-.9.5l-2.8-2.1-1.4 1.3c-.2.2-.3.2-.4 0l-.2-2.5 5.8-5.2c.3-.2 0-.4-.4-.2l-7.1 4.5-2.8-.9c-.6-.2-.6-.6.1-.9z" fill="white"/>
+                  </svg>
+                  Telegram
+                </CardTitle>
                 <Toggle
                   checked={settings.enableTelegram}
                   onChange={(v) => setSettings((prev) => ({ ...prev, enableTelegram: v }))}

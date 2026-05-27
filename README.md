@@ -329,3 +329,51 @@ User กดเติมเงิน → เลือก Package → Backend ส�
 - Limit รวม = 30 (free) + bonus_quota (ที่ซื้อ)
 - Webhook มี idempotency check — ไม่เพิ่ม quota ซ้ำแม้ Stripe ส่ง event ซ้ำ
 - รองรับ PromptPay (QR Code) สำหรับ user ไทย
+
+---
+
+## 🔑 Google OAuth Setup (Login with Google)
+
+### Step 1: สร้าง OAuth Client ใน Google Cloud Console
+
+1. ไปที่ [Google Cloud Console](https://console.cloud.google.com)
+2. สร้าง Project ใหม่ (หรือใช้ project เดิม)
+3. ไปที่ **APIs & Services → Credentials**
+4. กด **Create Credentials → OAuth 2.0 Client ID**
+5. เลือก Application type: **Web application**
+6. ตั้งชื่อ เช่น "Receipt Scanner"
+7. ใน **Authorized redirect URIs** เพิ่ม:
+   ```
+   https://aumbclcbgrvqflarturv.supabase.co/auth/v1/callback
+   ```
+   (เปลี่ยน URL ตาม Supabase project ของคุณ)
+8. กด **Create** → จะได้ **Client ID** และ **Client Secret**
+
+### Step 2: ตั้งค่า OAuth Consent Screen
+
+1. ไปที่ **APIs & Services → OAuth consent screen**
+2. เลือก **External**
+3. กรอกข้อมูล:
+   - App name: `Receipt Scanner AI`
+   - User support email: อีเมลของคุณ
+   - Developer contact: อีเมลของคุณ
+4. ใน Scopes เพิ่ม: `email`, `profile`, `openid`
+5. กด Save
+
+### Step 3: เปิด Google Provider ใน Supabase
+
+1. ไปที่ [Supabase Dashboard](https://supabase.com/dashboard) → เลือก Project
+2. ไปที่ **Authentication → Providers → Google**
+3. เปิด **Enable Google provider**
+4. ใส่ **Client ID** และ **Client Secret** ที่ได้จาก Step 1
+5. กด Save
+
+### Step 4: อัพเดท Supabase Redirect URL (Production)
+
+ถ้า deploy แล้ว ไปที่ Supabase → Authentication → URL Configuration:
+- **Site URL:** `https://your-app.vercel.app`
+- **Redirect URLs:** เพิ่ม `https://your-app.vercel.app/**`
+
+### เสร็จแล้ว!
+
+ตอนนี้หน้า Login จะมีปุ่ม "เข้าสู่ระบบด้วย Google" — กดแล้วจะ redirect ไป Google → เลือกบัญชี → กลับมาที่ app พร้อม login สำเร็จ
