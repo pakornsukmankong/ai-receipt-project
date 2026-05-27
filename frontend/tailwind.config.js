@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-kanit)', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['var(--font-inter)', 'var(--font-kanit)', 'system-ui', '-apple-system', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

@@ -6,7 +6,7 @@ import { useLanguage } from "../../i18n/LanguageContext";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
 import AuthGuard from "../../components/AuthGuard";
-import { CheckCircle, Receipt, ArrowLeft, Upload } from "lucide-react";
+import { CheckCircle, ArrowLeft, Upload } from "lucide-react";
 
 function SuccessPage() {
   const { t } = useLanguage();
@@ -18,10 +18,9 @@ function SuccessPage() {
 
   return (
     <>
-      <nav className="flex items-center justify-between px-6 py-3 border-b sticky top-0 bg-background/80 backdrop-blur-md z-50">
-        <div className="flex items-center gap-2 font-bold text-lg">
-          <Receipt className="h-5 w-5 text-primary" />
-          Receipt Scanner AI
+      <nav className="flex items-center justify-between px-8 py-4 border-b sticky top-0 bg-background/90 backdrop-blur-md z-50">
+        <div className="font-black text-lg tracking-tight">
+          Receipt Scanner.
         </div>
       </nav>
 

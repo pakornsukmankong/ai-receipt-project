@@ -8,7 +8,6 @@ import { Input } from "../components/ui/input";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "../components/ui/card";
 import { Spinner } from "../components/ui/spinner";
 import LanguageSwitch from "../components/LanguageSwitch";
-import { Receipt } from "lucide-react";
 
 export default function AuthPage() {
   const { signIn, signUp, signInWithGoogle } = useAuth();
@@ -63,10 +62,9 @@ export default function AuthPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <nav className="flex items-center justify-between px-6 py-3 border-b">
-        <div className="flex items-center gap-2 font-bold text-lg">
-          <Receipt className="h-5 w-5 text-primary" />
-          Receipt Scanner AI
+      <nav className="flex items-center justify-between px-8 py-4 border-b">
+        <div className="font-black text-lg tracking-tight">
+          Receipt Scanner.
         </div>
         <LanguageSwitch />
       </nav>

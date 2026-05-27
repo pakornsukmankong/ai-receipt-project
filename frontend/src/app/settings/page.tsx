@@ -10,7 +10,7 @@ import { Spinner } from "../components/ui/spinner";
 import LanguageSwitch from "../components/LanguageSwitch";
 import UserMenu from "../components/UserMenu";
 import AuthGuard from "../components/AuthGuard";
-import { Receipt, ArrowLeft, Save } from "lucide-react";
+import { ArrowLeft, Save } from "lucide-react";
 import api from "../lib/api";
 import type { ApiError } from "../lib/api";
 import type { UserSettings } from "../types";
@@ -85,10 +85,9 @@ function SettingsPage() {
 
   return (
     <>
-      <nav className="flex items-center justify-between px-6 py-3 border-b sticky top-0 bg-background/80 backdrop-blur-md z-50">
-        <Link href="/" className="flex items-center gap-2 font-bold text-lg hover:opacity-70 transition-opacity">
-          <Receipt className="h-5 w-5 text-primary" />
-          Receipt Scanner AI
+      <nav className="flex items-center justify-between px-8 py-4 border-b sticky top-0 bg-background/90 backdrop-blur-md z-50">
+        <Link href="/" className="font-black text-lg tracking-tight hover:opacity-70 transition-opacity">
+          Receipt Scanner.
         </Link>
         <div className="flex items-center gap-2">
           <LanguageSwitch />
@@ -97,9 +96,9 @@ function SettingsPage() {
       </nav>
 
       <div className="max-w-2xl mx-auto px-4 py-10">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold tracking-tight mb-2">⚙️ {t.settingsTitle}</h1>
-          <p className="text-muted-foreground">{t.settingsSubtitle}</p>
+        <div className="text-center mb-10">
+          <h1 className="text-3xl font-black tracking-tight mb-2">{t.settingsTitle}</h1>
+          <p className="text-muted-foreground text-sm">{t.settingsSubtitle}</p>
         </div>
 
         <form onSubmit={handleSave} className="space-y-5">

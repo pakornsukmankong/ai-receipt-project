@@ -7,7 +7,7 @@ import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 import { Spinner } from "../components/ui/spinner";
 import AuthGuard from "../components/AuthGuard";
-import { Receipt, ArrowLeft, Zap, CreditCard } from "lucide-react";
+import { ArrowLeft, CreditCard } from "lucide-react";
 import api from "../lib/api";
 import type { ApiError } from "../lib/api";
 import type { UsageData, TopUpPackage } from "../types";
@@ -70,10 +70,9 @@ function TopUpPage() {
 
   return (
     <>
-      <nav className="flex items-center justify-between px-6 py-3 border-b sticky top-0 bg-background/80 backdrop-blur-md z-50">
-        <div className="flex items-center gap-2 font-bold text-lg">
-          <Receipt className="h-5 w-5 text-primary" />
-          Receipt Scanner AI
+      <nav className="flex items-center justify-between px-8 py-4 border-b sticky top-0 bg-background/90 backdrop-blur-md z-50">
+        <div className="font-black text-lg tracking-tight">
+          Receipt Scanner.
         </div>
         <Link href="/">
           <Button variant="ghost" size="sm">
@@ -84,12 +83,9 @@ function TopUpPage() {
       </nav>
 
       <div className="max-w-2xl mx-auto px-4 py-10 pb-20">
-        <div className="text-center mb-8">
-          <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-            <Zap className="h-7 w-7 text-primary" />
-          </div>
-          <h1 className="text-2xl font-bold tracking-tight mb-2">{t.topupTitle}</h1>
-          <p className="text-muted-foreground">{t.topupSubtitle}</p>
+        <div className="text-center mb-10">
+          <h1 className="text-3xl font-black tracking-tight mb-2">{t.topupTitle}</h1>
+          <p className="text-muted-foreground text-sm">{t.topupSubtitle}</p>
         </div>
 
         {usage && (
