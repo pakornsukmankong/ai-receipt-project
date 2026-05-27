@@ -16,6 +16,7 @@ export default function Navbar() {
   const navLinks = [
     { href: "/", label: t.navHome },
     { href: "/upload", label: t.navUpload },
+    { href: "/pricing", label: t.navPricing },
   ];
 
   return (
